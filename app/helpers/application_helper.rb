@@ -41,8 +41,9 @@ module ApplicationHelper
   def global_allowed_to?(user, action)
     return false if user.nil?
 
-    projects = Project.all
+    projects = user.projects.active.includes(:enabled_modules).where(:enabled_modules => { :name => 'time_tracking' })
     projects.each do |p|
+      Rails.logger.debug ":id => #{p.id}, :identifier => #{p.identifier}, :name => #{p.name}"
       return true if user.allowed_to?(action, p)
     end
 
