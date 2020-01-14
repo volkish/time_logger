@@ -43,7 +43,6 @@ module ApplicationHelper
 
     projects = user.projects.active.includes(:enabled_modules).where(:enabled_modules => { :name => 'time_tracking' })
     projects.each do |p|
-      Rails.logger.debug ":id => #{p.id}, :identifier => #{p.identifier}, :name => #{p.name}"
       return true if user.allowed_to?(action, p)
     end
 
