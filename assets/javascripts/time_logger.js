@@ -32,6 +32,7 @@ $(function() {
     }
     $($this.data('replace')).html(data);
     $this.trigger('ajax:replaced');
+    startStop();
     return true;
   });
 });
@@ -53,107 +54,70 @@ function addTransitionField() {
 }
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
+let x;
+// let timer;
+let startstop = 0;
+let started_on = 0;
+/* holds incrementing value */
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+/* Contains and outputs returned value of  function checkTime */
+let secOut = 0;
+let minOut = 0;
+let hourOut = 0;
 
-var x;
-var startstop = 0;
-
-function startStop() { /* Toggle StartStop */
-
-  startstop = startstop + 1;
-
-  if (startstop === 1) {
-    start();
-    document.getElementById("start").innerHTML = "Stop";
-  } else if (startstop === 2) {
-    document.getElementById("start").innerHTML = "Start";
-    startstop = 0;
-    stop();
-  }
-
+function pause_timer() {
+  if (!x) { return; } // no timer running
+  stop_timer();
 }
 
-function start() {
-  x = setInterval(timer, 10);
-} /* Start */
+/* Start */
+function start_timer(sec, min, hour) {
+  if (x) { return; } // a timer is already running
 
-function stop() {
+  // get the time
+  seconds = sec;
+  minutes = min;
+  hours = hour;
+
+  x = setInterval(tl_timer, 1000);
+}
+
+/* Stop */
+function stop_timer() {
   clearInterval(x);
-} /* Stop */
-
-var milisec = 0;
-var sec = 0; /* holds incrementing value */
-var min = 0;
-var hour = 0;
-
-/* Contains and outputs returned value of  function checkTime */
-
-var miliSecOut = 0;
-var secOut = 0;
-var minOut = 0;
-var hourOut = 0;
+  x = null;
+}
 
 /* Output variable End */
 
+function tl_timer() {
+  secOut = checkTime(seconds);
+  minOut = checkTime(minutes);
+  hourOut = checkTime(hours);
 
-function timer() {
-  /* Main Timer */
+  seconds = ++seconds;
 
-
-  miliSecOut = checkTime(milisec);
-  secOut = checkTime(sec);
-  minOut = checkTime(min);
-  hourOut = checkTime(hour);
-
-  milisec = ++milisec;
-
-  if (milisec === 100) {
-    milisec = 0;
-    sec = ++sec;
+  if (seconds === 60) {
+    minutes = ++minutes;
+    seconds = 0;
   }
 
-  if (sec == 60) {
-    min = ++min;
-    sec = 0;
+  if (minutes === 60) {
+    minutes = 0;
+    hours = ++hours;
   }
 
-  if (min == 60) {
-    min = 0;
-    hour = ++hour;
-
-  }
-
-
-  document.getElementById("milisec").innerHTML = miliSecOut;
   document.getElementById("sec").innerHTML = secOut;
   document.getElementById("min").innerHTML = minOut;
   document.getElementById("hour").innerHTML = hourOut;
-
 }
 
-
 /* Adds 0 when value is <10 */
-
-
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i;
   }
   return i;
-}
-
-function reset() {
-
-
-  /*Reset*/
-
-  milisec = 0;
-  sec = 0;
-  min = 0
-  hour = 0;
-
-  document.getElementById("milisec").innerHTML = "00";
-  document.getElementById("sec").innerHTML = "00";
-  document.getElementById("min").innerHTML = "00";
-  document.getElementById("hour").innerHTML = "00";
-
 }
