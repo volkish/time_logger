@@ -89,7 +89,7 @@ class TimeLoggersController < ApplicationController
     @time_logger.destroy
     flash[:notice] = l(:time_logger_delete_success)
     respond_to do |format|
-      format.html {redirect_to time_loggers_path}
+      format.html {redirect_to time_logger_index_path}
     end
   end
 
