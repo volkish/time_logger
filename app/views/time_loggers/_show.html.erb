@@ -37,7 +37,3 @@
             :id => 'time-logger-stop-btn',
             :onclick => 'stop_timer();'
 %>
-
-<% if User.current.allowed_to?(:log_time, nil, :global => true) || User.current.allowed_to?(:view_others_time_loggers, nil, :global => true) %>
-  <%= list_link %>
-<% end %>

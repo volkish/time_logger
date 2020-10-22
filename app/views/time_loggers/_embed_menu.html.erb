@@ -1,4 +1,3 @@
-<% @time_logger = time_logger_for(User.current) %>
 <% if @time_logger.present? %>
   <%# a time tracker is running %>
   <%# display link to tracking issue time tracker itself and pause/resume stop actions %>
@@ -16,5 +15,7 @@
 <% end %>
 
 <% if User.current.allowed_to?(:log_time, nil, :global => true) || User.current.allowed_to?(:view_others_time_loggers, nil, :global => true) %>
-  <%= list_link %>
+  <%= content_tag(:span) do %>
+    <%= link_to('', time_logger_index_path, :class => 'icon-action icon-list-action', :title => l(:list_time_loggers)) %>
+  <% end %>
 <% end %>

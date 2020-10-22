@@ -72,10 +72,4 @@ module ApplicationHelper
         :remote => true
     )
   end
-
-  def list_link
-    content_tag(:span) do
-      link_to('', time_logger_index_path, :class => 'icon-action icon-list-action', :title => l(:list_time_loggers))
-    end
-  end
 end
