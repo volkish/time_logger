@@ -17,15 +17,13 @@ class TimeLoggersController < ApplicationController
     @time_logger = TimeLogger.new(:issue_id => params[:issue_id])
     @time_logger.started_on = Time.current
 
-    if @time_logger.save
-      apply_status_transition(@issue) unless Setting.plugin_time_logger['status_transitions'].nil?
-
-      respond_to do |format|
+    respond_to do |format|
+      if @time_logger.save
+        apply_status_transition(@issue) unless Setting.plugin_time_logger['status_transitions'].nil?
         format.js {render :partial => 'time_loggers/start'}
+      else
+        head :internal_server_error
       end
-    else
-      # flash[:error] = l(:start_time_logger_error)
-      head :bad_request
     end
   end
 
@@ -34,15 +32,15 @@ class TimeLoggersController < ApplicationController
       @time_logger.started_on = Time.current
       @time_logger.paused = false
 
-      if @time_logger.save
-        respond_to do |format|
+      respond_to do |format|
+        if @time_logger.save
           format.js {render :partial => 'time_loggers/resume'}
+        else
+          format.js {head :internal_server_error}
         end
-      else
-        render_error(:message => %{An internal error occurred, can't resume the time logger})
       end
     else
-      # flash[:error] = l(:no_time_logger_suspended)
+      # time logger already running or not found
       head :bad_request
     end
   end
@@ -53,19 +51,16 @@ class TimeLoggersController < ApplicationController
       @time_logger.time_spent = @time_logger.seconds_spent
       @time_logger.paused = true
 
-      if @time_logger.save
-        respond_to do |format|
+      respond_to do |format|
+        if @time_logger.save
           format.js {render :partial => 'time_loggers/suspend'}
+        else
+          format.js {head :internal_server_error}
         end
-      else
-        render_error(:message => %{An internal error occurred, can't suspend the time logger})
       end
     else
       # no time logger or it's not paused
-      # flash[:error] = l(:no_time_logger_running)
-      respond_to do |format|
-        format.js {head :bad_request}
-      end
+      head :bad_request
     end
   end
 
