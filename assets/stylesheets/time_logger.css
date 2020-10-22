@@ -13,9 +13,13 @@
 }
 .icon-action:hover { cursor: pointer; }
 
-.icon-time-not-running {
+.time-not-running {
     background-image: url(../images/colorized/time.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center left;
     padding-left: 14px;
+    cursor: default;
 }
 
 a#time-logger-menu {
