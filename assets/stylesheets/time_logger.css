@@ -23,13 +23,26 @@
     padding-left: 12px;
 }
 
+.icon-time-not-running {
+    background-image: url(../images/colorized/time.png);
+    padding-left: 14px;
+}
+
 .icon-action:hover {
-    /*border: 1px solid #5bc0de;*/
     cursor: pointer;
+}
+
+a#time-logger-menu {
+    cursor: default;
+    text-decoration: none;
 }
 
 span#time-logger-menu > a {
     margin-right: 4px;
+}
+
+span#time-logger-issue-id {
+    margin-left: 4px;
 }
 
 .icon-start-action {
@@ -51,13 +64,7 @@ span#time-logger-menu > a {
 
 div#tl-timer-wrapper {
     display: inline-flex;
-    /*margin-right: 8px;*/
     margin: 0 10px 0 2px;
-}
-
-a#time-logger-menu {
-    cursor: default;
-    text-decoration: none;
 }
 /* use the one below if you want the time logger in the bottom oon it's own
 #time-logger-menu { position:fixed; bottom:0px; right:8px; background:black; padding:1em; }
