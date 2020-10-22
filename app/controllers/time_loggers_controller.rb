@@ -93,21 +93,6 @@ class TimeLoggersController < ApplicationController
     end
   end
 
-  def render_menu
-    time_logger = TimeLogger.find_by(:user_id => User.current)
-    if time_logger
-      @issue = Issue.find_by(:id => time_logger.issue_id)
-      @project = @issue.project
-
-      respond_to do |format|
-        format.html { render partial: 'embed_menu' }
-      end
-    else
-      # there is no time logger is running nothing to render
-      head :ok
-    end
-  end
-
   protected
 
   def apply_status_transition(issue)
