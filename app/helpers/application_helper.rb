@@ -53,7 +53,7 @@ module ApplicationHelper
   def suspend_link(time_logger)
     link_to(
         '',
-        {:controller => 'time_loggers', :action => 'suspend', :id => time_logger.id},
+        time_logger_suspend_path(:id => time_logger.id),
         :class => 'icon-action icon-pause-action',
         :id => 'time-logger-suspend-btn',
         :title => l(:suspend_time_logger),
@@ -65,11 +65,17 @@ module ApplicationHelper
   def resume_link(time_logger)
     link_to(
         '',
-        {:controller => 'time_loggers', :action => 'resume', :id => time_logger.id},
+        time_logger_resume_path(:id => time_logger.id),
         :class => 'icon-action icon-start-action',
         :id => 'time-logger-resume-btn',
         :title => l(:suspend_time_logger),
         :remote => true
     )
+  end
+
+  def list_link
+    content_tag(:span) do
+      link_to('', time_logger_index_path, :class => 'icon-action icon-list-action', :title => l(:list_time_loggers))
+    end
   end
 end
