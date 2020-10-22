@@ -124,8 +124,11 @@ class TimeLoggersController < ApplicationController
     @time_logger = TimeLogger.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     respond_to do |format|
-      format.html { render_404 }
-      format.js { head :not_found }
+      format.html do
+        flash[:error] = l(:no_time_logger)
+        redirect_back_or_default(request.referer, :referer => true)
+      end
+      format.js {head :not_found}
     end
   end
 end
