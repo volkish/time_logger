@@ -69,7 +69,6 @@ class TimeLoggersController < ApplicationController
     hours = @time_logger.hours_spent
     @time_logger.destroy
 
-    # redirect_to :back
     redirect_to_new_time_entry = Setting.plugin_time_logger['redirect_to_new_time_entry']
 
     if redirect_to_new_time_entry
