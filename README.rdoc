@@ -30,6 +30,7 @@ The newest version is always at {GitHub}[http://github.com/speedy32129/time_logg
 == Running tests
 
 Inside your redmine root directory run command:
+
 <tt>bundle exec bin/rails redmine:plugins:test NAME=time_logger RAILS_ENV=test</tt>
 
 == Upgrade 
