@@ -51,8 +51,10 @@ class TimeLoggersControllerTest < Redmine::ControllerTest
     assert_nil TimeLogger.find_by(:id => 1)
 
     # nothing to stop
-    get :stop, :params => {:id => 1}
-    assert_response :not_found
+    get :stop, :params => {:id => 1, :back_url => home_url}
+    # time logger not found
+    # error shows and redirects back
+    assert_redirected_to home_url
   end
 
   def test_time_logger_setting_redirect_to_new_time_entry
