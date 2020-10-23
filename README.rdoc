@@ -27,6 +27,11 @@ The newest version is always at {GitHub}[http://github.com/speedy32129/time_logg
 5. Add "Time tracking" to the enabled modules for your project
 6. The link to the plugin should appear in the 'account' menu bar
 
+== Running tests
+
+Inside your redmine root directory run command:
+<tt>bundle exec bin/rails redmine:plugins:test NAME=time_logger RAILS_ENV=test</tt>
+
 == Upgrade 
 
 * If you are migrating from version 1.2 then we have to delete table records schema_migrations.
