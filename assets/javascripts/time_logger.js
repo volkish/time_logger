@@ -1,42 +1,3 @@
-/*
- * This script updates the element 'id' with 'newContent' if the two contents differ
- */
-function updateElementIfChanged(id, newContent) {
-    var el = $(id);
-    if (el.innerHTML != newContent) { el.update(newContent); }
-}
-
-$(function() {
-
-  // Support for data-with tag on elements with data-remote.
-  // Pass custom params to data-with to send them with the request.
-  $(document).on('ajax:beforeSend', '[data-remote][data-with]', function(event, xhr, settings){
-    var params = eval($(this).data('with'));
-    if (settings.url.match(/\?/)) {
-      settings.url = settings.url + '&' + params;
-    } else {
-      settings.url = settings.url + params;
-    }
-    return true;
-  });
-
-  // Support for data-replace tag on elements with data-remote.
-  // Pass an jQuery selector that should be replaced with the response from server.
-  $(document).on('ajax:success', '[data-remote][data-replace]', function(event, data) {
-    var $this = $(this);
-
-    // As of Rails 5.1 and the new rails-ujs, the parameters data, status, xhr have been bundled into event.detail.
-    // For information about the previously used jquery-ujs in Rails 5 and earlier, read the jquery-ujs wiki.
-    if (typeof(data) === "undefined") {
-      data = event.detail[2].response;
-    }
-    $($this.data('replace')).html(data);
-    $this.trigger('ajax:replaced');
-    startStop();
-    return true;
-  });
-});
-
 // Used in Plugin Settings page to delete transition
 function deleteTransitionField(from_id) {
   // changes field name to remove from settings.
@@ -53,9 +14,8 @@ function addTransitionField() {
   elem.innerHTML= new_tag;
 }
 
-// -----------------------------------------------------------------------------------------------------------------------------------------------------
+// timer
 let x;
-// let timer;
 let startstop = 0;
 let started_on = 0;
 /* holds incrementing value */
@@ -72,7 +32,6 @@ function pause_timer() {
   stop_timer();
 }
 
-/* Start */
 function start_timer(sec, min, hour) {
   if (x) { return; } // a timer is already running
 
@@ -84,14 +43,12 @@ function start_timer(sec, min, hour) {
   x = setInterval(tl_timer, 1000);
 }
 
-/* Stop */
 function stop_timer() {
   clearInterval(x);
   x = null;
 }
 
-/* Output variable End */
-
+// Output variable End
 function tl_timer() {
   secOut = checkTime(seconds);
   minOut = checkTime(minutes);
@@ -114,7 +71,7 @@ function tl_timer() {
   document.getElementById("hour").innerHTML = hourOut;
 }
 
-/* Adds 0 when value is <10 */
+// Adds 0 when value is <10
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i;
