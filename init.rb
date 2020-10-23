@@ -10,11 +10,9 @@ Redmine::Plugin.register :time_logger do
   author 'Jim McAleer'
   description 'The orignal author was Jérémie Delaitre.'
   url 'https://github.com/speedy32129/time_logger'
-  version '0.5.4'
+  version '20.10.23'
 
-  # fix for contect menus
-
-  requires_redmine version_or_higher: '1.1.0'
+  requires_redmine version_or_higher: '4.1.0'
 
   settings default: { refresh_rate: '60', status_transitions: {}, redirect_to_new_time_entry: 'off' }, partial: 'settings/time_logger'
 
