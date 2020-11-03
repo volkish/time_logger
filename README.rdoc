@@ -1,3 +1,17 @@
+This is a fork of http://github.com/speedy32129/time_logger
+
+What changed:
+
+* Plugin overhauled
+* Adapted to Rails 5.2
+* Fixed styles
+* Periodically ajax requests replaced with pure javascript time
+* Added functional tests
+
+![Preview](http://git.red-soft.biz/red2mine/time_logger/-/blob/41516d258daaaabcf6813761c452d670fde87799/1552138058249.gif)
+
+==== Original readme
+
 = Redmine Time Logger plugin for Redmine
 
 Latest tested version of Redmine is 3.4.5
