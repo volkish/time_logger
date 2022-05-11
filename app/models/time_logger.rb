@@ -11,7 +11,6 @@ end
 class TimeLogger < ActiveRecord::Base
   belongs_to :user
   belongs_to :issue
-  has_one :issue
 
   def initialize(arguments = nil)
     super(arguments)
