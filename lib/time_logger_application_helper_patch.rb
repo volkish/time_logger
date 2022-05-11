@@ -1,6 +1,6 @@
 require 'active_support/concern'
 
-module ApplicationHelperPatch
+module TimeLoggerApplicationHelperPatch
   extend ActiveSupport::Concern
 
   included do
@@ -61,6 +61,6 @@ module ApplicationHelperPatch
   end
 end
 
-unless ApplicationHelper.included_modules.include? ApplicationHelperPatch
-  ApplicationHelper.include ApplicationHelperPatch
+unless ApplicationHelper.included_modules.include? TimeLoggerApplicationHelperPatch
+  ApplicationHelper.include TimeLoggerApplicationHelperPatch
 end

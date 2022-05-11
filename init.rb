@@ -1,9 +1,5 @@
-require 'redmine'
-
-require_dependency 'time_logger_hooks'
-
-# workaround helping rails to find the helper-methods
-require File.join(File.dirname(__FILE__), 'app/helpers/application_helper.rb')
+require File.expand_path 'lib/time_logger_hooks', __dir__
+require File.expand_path 'lib/time_logger_application_helper_patch', __dir__
 
 Redmine::Plugin.register :time_logger do
   name 'Time Logger'
@@ -12,7 +8,7 @@ Redmine::Plugin.register :time_logger do
   url 'https://github.com/speedy32129/time_logger'
   version '20.10.23'
 
-  requires_redmine version_or_higher: '4.1.0'
+  requires_redmine version_or_higher: '5.0.0'
 
   settings default: { refresh_rate: '60', status_transitions: {}, redirect_to_new_time_entry: 'off' }, partial: 'settings/time_logger'
 
