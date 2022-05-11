@@ -3,7 +3,7 @@ This is a fork of http://github.com/speedy32129/time_logger
 What changed:
 
 * Plugin overhauled
-* Adapted to Rails 5.2
+* Adapted to Rails 6
 * Fixed styles
 * Periodically ajax requests replaced with pure javascript timer
 * Added functional tests
