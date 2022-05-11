@@ -1,16 +1,13 @@
-This is a fork of http://github.com/speedy32129/time_logger
+What have been changed:
 
-What changed:
-
-* Plugin overhauled
+* Plugin structure is overhauled
 * Adapted to Rails 6
-* Fixed styles
 * Periodically ajax requests replaced with pure javascript timer
 * Added functional tests
 
 Preview:
 
-![](http://git.red-soft.biz/red2mine/time_logger/-/raw/assets/1552138058249.gif)
+![](https://github.com/red-soft-ru/time_logger/raw/41516d258daaaabcf6813761c452d670fde87799/1552138058249.gif)
 
 ## Install
 
