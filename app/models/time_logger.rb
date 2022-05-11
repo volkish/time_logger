@@ -48,11 +48,10 @@ class TimeLogger < ActiveRecord::Base
   end
 
   def zombie?
-    user = help.user_from_id(user_id)
-    return true if user.nil? || user.locked?
-
-    issue = help.issue_from_id(issue_id)
-    return true if issue.nil? || !user.allowed_to?(:log_time, issue.project)
+    return true unless user
+    return true unless issue
+    return true if user.locked?
+    return true unless user.allowed_to?(:log_time, issue.project)
 
     false
   end
