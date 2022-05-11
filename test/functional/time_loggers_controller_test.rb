@@ -1,7 +1,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class TimeLoggersControllerTest < Redmine::ControllerTest
-  fixtures :time_loggers
+  fixtures :time_loggers, :users, :roles, :members, :member_roles, :projects, :issues, :issue_statuses
 
   def setup
     @request.session[:user_id] = 2
