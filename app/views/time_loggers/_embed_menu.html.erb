@@ -8,7 +8,7 @@
   <%= link_to(time_logger_start_path(:issue_id => @issue.id), :method => :get, :remote => true, :class => 'icon icon-start icon-action') do %>
     <%= content_tag(:span, %{#{l(:start_time_logger)} ##{@issue.id}}, :id => 'time-logger-issue-id') %>
   <% end %>
-<% elsif global_allowed_to?(User.current, :log_time) %>
+<% elsif User.current.allowed_to?(:log_time, nil, :global => true) %>
     <%# No time tracker is running but the user has the rights to track time on a project %>
     <%# Display the "Not running" entry %>
     <span class='time-not-running'><%= l(:time_logger_not_running) %>&nbsp;</span>
