@@ -8,7 +8,7 @@ Redmine::Plugin.register :time_logger do
   url 'https://github.com/red-soft-ru/time_logger'
   version '2022.05.0'
 
-  requires_redmine version_or_higher: '5.0.0'
+  requires_redmine version_or_higher: '4.0.0'
 
   settings default: { refresh_rate: '60', status_transitions: {}, redirect_to_new_time_entry: 'off' }, partial: 'settings/time_logger'
 
