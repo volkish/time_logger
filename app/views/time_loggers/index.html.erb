@@ -27,7 +27,7 @@
                                 <% else %>
                                     <td class="zombie"></td>
                                 <% end %>
-                                <td class="issue"><%= link_to_issue issue_from_id(time_logger[:issue_id]), :project => true %></td>
+                                <td class="issue"><%= link_to_issue time_logger.issue, :project => true %></td>
                                 <td class="start-date"><%= format_time(time_logger[:started_on]) %></td>
                                 <td class="spent-time"><%= time_logger.time_spent_to_s %></td>
                                 <td class="buttons">
@@ -75,8 +75,8 @@
                                 <% else %>
                                     <td class="zombie"></td>
                                 <% end %>
-                                <td class="user"><%= link_to_user user_from_id(time_logger[:user_id]) %></td>
-                                <td class="issue"><%= link_to_issue issue_from_id(time_logger[:issue_id]), :project => true %></td>
+                                <td class="user"><%= link_to_user time_logger.user %></td>
+                                <td class="issue"><%= link_to_issue time_logger.issue, :project => true %></td>
                                 <td class="start-date"><%= format_time(time_logger[:started_on]) %></td>
                                 <td class="spent-time"><%= time_logger.time_spent_to_s %></td>
                                 <td class="buttons">
