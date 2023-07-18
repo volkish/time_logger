@@ -1,5 +1,7 @@
 class TimeLoggersController < ApplicationController
   before_action :find_time_logger, :only => [:resume, :suspend, :stop, :delete]
+  after_action :apply_status_transition, only: :start,
+               if: proc { Setting.plugin_time_logger['status_transitions'].present? }
 
   def index
     if User.current.nil?
@@ -19,7 +21,6 @@ class TimeLoggersController < ApplicationController
 
     respond_to do |format|
       if @time_logger.save
-        apply_status_transition(@issue) unless Setting.plugin_time_logger['status_transitions'].nil?
         format.js {render :partial => 'time_loggers/start'}
       else
         head :internal_server_error
@@ -92,15 +93,16 @@ class TimeLoggersController < ApplicationController
     end
   end
 
-  protected
+  private
 
-  def apply_status_transition(issue)
+  def apply_status_transition
+    issue = @time_logger.issue
     new_status_id = Setting.plugin_time_logger['status_transitions'][issue.status_id.to_s]
     new_status = IssueStatus.find_by_id(new_status_id)
     if issue.new_statuses_allowed_to(User.current).include?(new_status)
-      journal = @issue.init_journal(User.current, notes = l(:time_logger_label_transition_journal))
-      @issue.status_id = new_status_id
-      @issue.save
+      issue.init_journal(User.current, l(:time_logger_label_transition_journal))
+      issue.status_id = new_status_id
+      issue.save
     end
   end
 

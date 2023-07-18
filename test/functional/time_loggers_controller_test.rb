@@ -1,7 +1,8 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class TimeLoggersControllerTest < Redmine::ControllerTest
-  fixtures :time_loggers, :users, :roles, :members, :member_roles, :projects, :issues, :issue_statuses
+  fixtures :time_loggers, :users, :roles, :members, :member_roles, :projects, :issues, :issue_statuses,
+           :trackers, :projects_trackers, :enabled_modules, :workflows, :issue_categories, :enumerations
 
   def setup
     @request.session[:user_id] = 2
@@ -74,5 +75,23 @@ class TimeLoggersControllerTest < Redmine::ControllerTest
                          action: 'edit',
                          id: t.issue_id,
                          time_entry: { hours: t.hours_spent }
+  end
+
+  def test_status_transition_after_time_logger_started
+    TimeLogger.delete_all
+    issue = Issue.find(1)
+    User.stubs(:current).returns(User.find(2)) # jsmith
+
+    # New => Closed
+    with_settings plugin_time_logger: { status_transitions: { "1" => "3" } }.with_indifferent_access do
+      assert_equal 1, issue.status_id # New
+      assert_nil issue.notes
+
+      get :start, params: { issue_id: 1 }, xhr: true
+
+      assert_response :success
+      assert_equal 3, issue.reload.status_id # Closed
+      assert_not_predicate issue.journals, :empty? # A new note created
+    end
   end
 end
