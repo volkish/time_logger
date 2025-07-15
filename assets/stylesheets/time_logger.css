@@ -27,6 +27,10 @@ a#time-logger-menu {
     text-decoration: none;
 }
 
+#time-logger-menu {
+    display: flex;
+}
+
 span#time-logger-menu > a { margin-right: 4px; }
 span#time-logger-issue-id { margin-left: 4px; }
 
