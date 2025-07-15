@@ -13,7 +13,7 @@
 }
 .icon-action:hover { cursor: pointer; }
 
-.icon-action.icon-clock {
+.icon-action:has(span) {
     aspect-ratio: unset;
 }
 
