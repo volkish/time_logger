@@ -8,10 +8,14 @@
     background-size: contain;
     background-position: center left;
     width: 100%;
-    height: 100%;
     padding-left: 12px;
+    aspect-ratio: 1/1;
 }
 .icon-action:hover { cursor: pointer; }
+
+.icon-action.icon-clock {
+    aspect-ratio: unset;
+}
 
 .time-not-running {
     background-image: url(../images/colorized/time.png);
